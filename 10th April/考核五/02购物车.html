@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,td,th{
+            border: 1px solid;
+        }
+        table{
+            width: 600px;
+            /* 变成单线 */
+            border-collapse: collapse;
+            margin: 100px auto;
+        }
+        tr{
+            height: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>产品名称</th>
+            <th>产品单价</th>
+            <th>产品数量</th>
+            <th>总价</th>
+        </tr>
+        <tr>
+            <td>iPhone5</td>
+            <td>500</td>
+            <td>
+                <button onclick="remove(this)">-</button>
+                <span>1</span>
+                <button onclick="add(this)">+</button>
+            </td>
+            <td class="money">500</td>
+        </tr>
+        <tr>
+            <td>iPhone6</td>
+            <td>600</td>
+            <td>
+                <button onclick="remove(this)">-</button>
+                <span>1</span>
+                <button onclick="add(this)">+</button>
+            </td>
+            <td class="money">600</td>
+        </tr>
+        <tr>
+            <td>iPhone7</td>
+            <td>700</td>
+            <td>
+                <button onclick="remove(this)">-</button>
+                <span>1</span>
+                <button onclick="add(this)">+</button>
+            </td>
+            <td class="money">700</td>
+        </tr>
+        <tr>
+            <td colspan="3">total</td>
+            <td id="total">1800</td>
+        </tr>
+    </table>
+    <script>
+        function add(obj){
+            var num=parseInt(obj.previousElementSibling.innerHTML);
+            num++;
+            obj.previousElementSibling.innerHTML=num;
+            var price=num*parseInt(obj.parentElement.previousElementSibling.innerHTML);
+            obj.parentElement.nextElementSibling.innerHTML=price;
+            totalPrice();
+        }
+        function remove(obj){
+            var num1=parseInt(obj.nextElementSibling.innerHTML);
+            if(num1>1){
+                num1--;
+                obj.nextElementSibling.innerHTML=num1;
+                var cost=num1*parseInt(obj.parentElement.previousElementSibling.innerHTML);
+                obj.parentElement.nextElementSibling.innerHTML=cost;
+                totalPrice();
+            }
+        }
+        function totalPrice(){
+            var total=document.getElementById('total');
+            var money=document.getElementsByName('money');
+            var sum=0;
+            for(let i=0;i<money.length;i++){
+                sum+=parseInt(money[i].innerHTML);
+            }
+            total.innerHTML=sum.toString();
+        }
+    </script>
+</body>
+</html>
